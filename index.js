@@ -30,6 +30,18 @@ const stopDrag = () => {
     handle.style.cursor = "grab";
 };
 
+const moveBox = (clientX) => {
+    const rect = scrollBar.getBoundingClientRect();
+    const clickX = clientX - rect.left;
+
+    let newPosition = clickX - handle.clientWidth / 2;
+    const maxPosition = scrollBar.clientWidth - handle.clientWidth;
+    newPosition = Math.max(0, Math.min(newPosition, maxPosition));
+
+    const scrollPercentage = newPosition / maxPosition;
+    board.scrollLeft = scrollPercentage * (board.scrollWidth - board.clientWidth);
+}
+
 board.addEventListener("scroll", () => {
     const scrollPercentage = board.scrollLeft / (board.scrollWidth - board.clientWidth);
     const handlePosition = scrollPercentage * (scrollBar.clientWidth - handle.clientWidth);
@@ -43,8 +55,17 @@ document.addEventListener("mousemove", (e) => {
     duringDrag(e.clientX);
 });
 
+scrollBar.addEventListener("click", (e) => {
+    if (e.target === handle)
+        return;
+
+    moveBox(e.clientX);
+})
+
 window.addEventListener("resize", () => {
     const visibleRatio = board.clientWidth / board.scrollWidth;
     const handleWidth = visibleRatio * scrollBar.clientWidth;
     handle.style.width = handleWidth + "px";
 });
+
+window.dispatchEvent(new Event("resize"));
