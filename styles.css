@@ -39,23 +39,34 @@ body {
 
 .scroll-tool {
     position: fixed;
-    bottom: 20px;
-    right: 40px;
-
-    width: 200px;
-    height: 5rem;
-    background: #8a8989;
-    border-radius: 8px;
-
+    bottom: 1.5rem;
+    right: 2.5rem;
+    background: #adadad;
+    border-radius: 0.5rem;
     display: flex;
     align-items: center;
-    padding: 5px;
+    padding: 0.25rem;
 }
 
-.scroll-box {
-    min-width: 40px;
-    height: 100%;
-    border: 3px solid blue;
+.scroll-handle {
+    width: 2.5rem;
+    height: 4.5rem;
+    border: 3px solid rgb(0, 0, 0);
     border-radius: 0.5rem;
-    cursor:move;
+    cursor: grab;
+    position: absolute;
+    left: 0;
+}
+
+.tool-contents {
+    display: flex;
+    gap: 0.25rem;
+    padding: 0.2rem;
+}
+
+.tool-contents > div {
+    height: 4rem;
+    width: 1rem;
+    background-color: #555;
+    border-radius: 0.25rem;
 }
