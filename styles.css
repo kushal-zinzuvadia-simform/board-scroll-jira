@@ -61,7 +61,6 @@ body {
 .tool-contents {
     display: flex;
     gap: 0.25rem;
-    padding: 0.2rem;
 }
 
 .tool-contents > div {

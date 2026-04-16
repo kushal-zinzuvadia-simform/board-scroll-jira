@@ -2,7 +2,7 @@
 
 const board = document.querySelector(".board");
 const handle = document.querySelector(".scroll-handle");
-const scrollBar = document.querySelector(".scroll-tool");
+const scrollBar = document.querySelector(".tool-contents");
 
 let isDragging = false;
 
@@ -37,9 +37,14 @@ board.addEventListener("scroll", () => {
 });
 
 handle.addEventListener("mousedown", startDrag);
-handle.addEventListener("mouseup", stopDrag);
+document.addEventListener("mouseup", stopDrag);
 
-handle.addEventListener("mousemove", (e) => {
+document.addEventListener("mousemove", (e) => {
     duringDrag(e.clientX);
 });
 
+window.addEventListener("resize", () => {
+    const visibleRatio = board.clientWidth / board.scrollWidth;
+    const handleWidth = visibleRatio * scrollBar.clientWidth;
+    handle.style.width = handleWidth + "px";
+});
